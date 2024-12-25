@@ -1,0 +1,55 @@
+# Build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.swp
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Secrets and sensitive files
+appsettings.json
+appsettings.*.json
+UserSecrets/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+*.seed
+*.old
+*.bak
+
+# Dependency directories
+wwwroot/lib/
+node_modules/
+packages/
+.vscode/
+
+# System-specific files
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+
+# Output from tools
+*.nupkg
+*.snupkg
+
+# Generated files
+Generated/
+ServiceReferences/
+
+# API keys or environment configurations
+.env
+.env.local
+.env.*.local
+
+# Others
+*.lock.json
