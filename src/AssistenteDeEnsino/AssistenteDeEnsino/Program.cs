@@ -2,6 +2,7 @@ using AssistenteDeEnsino.Components;
 using AssistenteDeEnsino.Components.Player.Data;
 using AssistenteDeEnsino.Configurations;
 using AssistenteDeEnsino.Data;
+using AssistenteDeEnsino.Services.OpenAI;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
+builder.Services.AddScoped<IGptService, GptService>();
 
 var app = builder.Build();
 

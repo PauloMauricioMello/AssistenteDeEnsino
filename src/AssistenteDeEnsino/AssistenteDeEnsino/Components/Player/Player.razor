@@ -2,26 +2,29 @@
 @rendermode InteractiveServer
 
 @using AssistenteDeEnsino.Components.Player.Data
+@using AssistenteDeEnsino.Services.OpenAI
 @using Microsoft.AspNetCore.Components.Web
+
 @inject IVideoRepository _videoRepository
+@inject IGptService _gptService
 
 
 <style>
       .message-user {
-            max-width: 70%;
+      max-width: 70%;
       }
 
       .message-ai {
-            max-width: 70%;
+      max-width: 70%;
       }
 
       .container-custom {
-            height: 94vh !important;
+      height: 94vh !important;
       }
 
       .chat-history {
-            height: 70vh;
-            overflow-y: auto;
+      height: 70vh;
+      overflow-y: auto;
       }
 </style>
 
@@ -123,7 +126,8 @@
 
                   Messages.Add(new Message { Text = UserMessage, IsUser = true });
 
-                  Messages.Add(new Message { Text = "Eu vou dominar o mundo!", IsUser = false });
+                  var resposta = await _gptService.ProcessarPergunta(UserMessage, video.Transcript);
+                  Messages.Add(new Message { Text = resposta, IsUser = false });
 
                   UserMessage = string.Empty;
                   isProcessingMessage = false;
