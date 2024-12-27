@@ -1,4 +1,5 @@
 using AssistenteDeEnsino.Components;
+using AssistenteDeEnsino.Components.Player.Data;
 using AssistenteDeEnsino.Configurations;
 using AssistenteDeEnsino.Data;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 
 var app = builder.Build();
 
