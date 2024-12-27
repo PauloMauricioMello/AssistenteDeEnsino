@@ -1,5 +1,7 @@
-using AssistenteDeEnsino.Client.Pages;
 using AssistenteDeEnsino.Components;
+using AssistenteDeEnsino.Configurations;
+using AssistenteDeEnsino.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -31,5 +36,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(AssistenteDeEnsino.Client._Imports).Assembly);
+
+app.UseDbMigrationHelper();
 
 app.Run();
