@@ -2,29 +2,31 @@
 @rendermode InteractiveServer
 
 @using AssistenteDeEnsino.Components.Player.Data
+@using AssistenteDeEnsino.Services.Markdown
 @using AssistenteDeEnsino.Services.OpenAI
 @using Microsoft.AspNetCore.Components.Web
 
 @inject IVideoRepository _videoRepository
 @inject IGptService _gptService
+@inject IMarkdownService MarkdownService
 
 
 <style>
       .message-user {
-      max-width: 70%;
+            max-width: 70%;
       }
 
       .message-ai {
-      max-width: 70%;
+            max-width: 70%;
       }
 
       .container-custom {
-      height: 94vh !important;
+            height: 94vh !important;
       }
 
       .chat-history {
-      height: 70vh;
-      overflow-y: auto;
+            height: 70vh;
+            overflow-y: auto;
       }
 </style>
 
@@ -63,7 +65,7 @@
                               {
                                     <div class="d-flex justify-content-end mb-2">
                                           <div class="message-user bg-primary text-white p-2 rounded">
-                                                @message.Text
+                                                @((MarkupString)MarkdownService.ConvertToHtml(message.Text))
                                           </div>
                                           <img src="/images/avatar-user.png" alt="Você" class="rounded-circle ms-2" style="width: 40px; height: 40px;">
                                     </div>
@@ -73,7 +75,7 @@
                                     <div class="d-flex justify-content-start mb-2">
                                           <img src="/images/avatar-assistente.png" alt="Assistente de Ensino" class="rounded-circle me-2" style="width: 40px; height: 40px;">
                                           <div class="message-ai bg-light p-2 rounded">
-                                                @message.Text
+                                                @((MarkupString)MarkdownService.ConvertToHtml(message.Text))
                                           </div>
                                     </div>
                               }
@@ -131,6 +133,7 @@
 
                   UserMessage = string.Empty;
                   isProcessingMessage = false;
+                  StateHasChanged();
             }
       }
 

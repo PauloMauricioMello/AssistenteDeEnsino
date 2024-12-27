@@ -2,6 +2,7 @@ using AssistenteDeEnsino.Components;
 using AssistenteDeEnsino.Components.Player.Data;
 using AssistenteDeEnsino.Configurations;
 using AssistenteDeEnsino.Data;
+using AssistenteDeEnsino.Services.Markdown;
 using AssistenteDeEnsino.Services.OpenAI;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ builder.Services.Configure<OpenAIOptions>(builder.Configuration.GetSection("Open
 
 builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 builder.Services.AddScoped<IGptService, GptService>();
+builder.Services.AddScoped<IMarkdownService, MarkdownService>();
 
 var app = builder.Build();
 
